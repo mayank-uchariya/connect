@@ -9,6 +9,7 @@ import { UserButton, SignOutButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import profile from '@/assets/profile.png';
 import logo from '@/assets/connect.png';
+import { dark } from '@clerk/themes';
 
 const LeftSection: FC = () => {
 
@@ -70,10 +71,10 @@ const LeftSection: FC = () => {
       
       {/* User Button Section */}
       <div className="flex gap-4 items-center">
-        <UserButton afterSwitchSessionUrl="/sign-in" />
+        <UserButton appearance={{baseTheme:dark}} afterSignOutUrl="/sign-in/" />
         <p className="text-light-1 text-body-bold">Manage Account</p>
       </div>
-      
+    
       {/* Sign Out Button (Optional) */}
       <div className="mt-4 flex items-center justify-between">
         <SignOutButton>
