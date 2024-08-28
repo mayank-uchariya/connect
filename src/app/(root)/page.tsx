@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 
 const Home = () => {
@@ -14,7 +16,6 @@ const Home = () => {
             <h2 className="text-2xl font-semibold text-gray-900">What's happening</h2>
             <p className="mt-4 text-gray-700">News, updates, and more...</p>
           </div>
-          {/* Add more content to demonstrate scrolling */}
           <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
             <h2 className="text-2xl font-semibold text-gray-900">Explore</h2>
             <p className="mt-4 text-gray-700">Discover new topics and communities...</p>
