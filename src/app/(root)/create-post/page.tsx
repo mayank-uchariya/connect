@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Posting from "@/components/Posting";
 import { useUser } from "@clerk/nextjs";
 import Loader from "@/components/Loader";
 
-const page = () => {
+const CreatePost = () => {
   const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>({});
@@ -30,13 +30,15 @@ const page = () => {
     caption: "",
     tag: "",
     postPhoto: null,
-  }
+  };
 
-  return loading || !isLoaded ? <Loader/> : (
+  return loading || !isLoaded ? (
+    <Loader />
+  ) : (
     <div>
-      <Posting post={postData} handlePublish={()=>{}} />
+      <Posting post={postData} handlePublish={() => {}} />
     </div>
   );
 };
 
-export default page;
+export default CreatePost;
