@@ -21,7 +21,7 @@ export default function RootLayout({
         <body className="bg-gray-100 font-sans text-gray-900">
           <div className="flex min-h-screen">
             <LeftSection />
-            <main className="flex-1 flex flex-col h-[calc(100vh-4rem)] overflow-auto">
+            <main className="flex-1 flex flex-col h-[calc(110vh-5rem)] overflow-auto">
               <Navbar />
               <div className="flex-shrink p-4">
                 {children}
