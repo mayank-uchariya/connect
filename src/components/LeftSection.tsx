@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Logout } from "@mui/icons-material";
 import { FaHome, FaPen, FaUsers, FaUserEdit } from "react-icons/fa";
 import { UserButton, SignOutButton, useUser } from "@clerk/nextjs";
@@ -43,7 +43,7 @@ const LeftSection: FC = () => {
     },
     { href: "/people", label: "People", icon: <FaUsers className="text-xl" /> },
     {
-      href: "/profile",
+      href: `/profile/${userData?.clerkId}`,
       label: "Edit Profile",
       icon: <FaUserEdit className="text-xl" />,
     },
@@ -54,55 +54,55 @@ const LeftSection: FC = () => {
   }
 
   return (
-    <aside className="bg-teal-500 h-screen p-6 text-white w-64 flex flex-col space-y-6 shadow-lg max-md:hidden">
+    <aside className="bg-white h-screen p-6 text-gray-800 w-64 flex flex-col space-y-6 shadow-lg max-md:hidden">
       {/* Logo/Title Section */}
-      <div className="text-white text-3xl font-bold mb-2 flex items-center space-x-2 pb-4 border-b-[1px] border-white justify-center">
+      <div className="text-gray-700 text-3xl font-bold mb-2 flex items-center space-x-2 pb-4 border-b-[1px] border-gray-300 justify-center">
         <Image src={logo} alt="logo" width={32} height={32} />
         <span>Connect</span>
       </div>
 
       {/* Profile Section */}
-      <div className="flex flex-col items-center mb-6 pb-4 border-b-[1px] border-white">
+      <div className="flex flex-col items-center mb-6 pb-4 border-b-[1px] border-gray-300">
         <Image
           src={userData?.profilePhoto as string}
           alt="User-profile"
           width={64}
           height={64}
-          className="border-2 border-white rounded-full mb-4"
+          className="border-2 border-gray-300 rounded-full mb-4"
         />
-        <p className="mb-2">
+        <p className="mb-2 font-semibold text-gray-700">
           {userData?.firstName} {userData?.lastName}
         </p>
         <div className="user-details flex justify-around w-full">
           <div className="text-center">
-            <p className="font-semibold">{userData?.posts?.length}</p>
-            <p className="text-sm">Posts</p>
+            <p className="font-semibold text-gray-800">{userData?.posts?.length}</p>
+            <p className="text-sm text-gray-600">Posts</p>
           </div>
           <div className="text-center">
-            <p className="font-semibold">{userData?.followers?.length}</p>
-            <p className="text-sm">Followers</p>
+            <p className="font-semibold text-gray-800">{userData?.followers?.length}</p>
+            <p className="text-sm text-gray-600">Followers</p>
           </div>
           <div className="text-center">
-            <p className="font-semibold">{userData?.following?.length}</p>
-            <p className="text-sm">Followings</p>
+            <p className="font-semibold text-gray-800">{userData?.following?.length}</p>
+            <p className="text-sm text-gray-600">Followings</p>
           </div>
         </div>
       </div>
 
       {/* Navigation Links */}
-      <ul className="space-y-4 pb-4 border-b-[1px] border-white">
+      <ul className="space-y-4 pb-4 border-b-[1px] border-gray-300">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
               className={`flex items-center space-x-3 p-2 rounded-lg transition-colors ${
                 pathname === link.href
-                  ? "bg-white text-teal-500"
-                  : "hover:bg-white hover:text-teal-500"
+                  ? "bg-gray-200 text-gray-900"
+                  : "hover:bg-gray-100 hover:text-gray-900"
               }`}
             >
               {link.icon}
-              <span className="text-md">{link.label}</span>
+              <span className="text-md font-medium">{link.label}</span>
             </Link>
           </li>
         ))}
@@ -114,13 +114,13 @@ const LeftSection: FC = () => {
           appearance={{ baseTheme: dark }}
           afterSignOutUrl="/sign-in/"
         />
-        <p className="text-light-1 text-body-bold">Manage Account</p>
+        <p className="text-gray-600 text-body-bold">Manage Account</p>
       </div>
 
       {/* Sign Out Button (Optional) */}
       <div className="mt-2 flex items-center justify-between">
         <SignOutButton>
-          <button className="flex text-sm items-center gap-2 bg-red-500 text-white px-2 py-[4px] rounded-lg hover:bg-red-600 transition-colors">
+          <button className="flex text-sm items-center gap-2 bg-gray-300 text-gray-800 px-2 py-[4px] rounded-lg hover:bg-gray-400 transition-colors">
             <Logout />
             <span>Sign Out</span>
           </button>

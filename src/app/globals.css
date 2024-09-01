@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 6px;
@@ -13,16 +14,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4fd1c5, #6b46c1);
+  background: linear-gradient(180deg, white, black);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #38b2ac, #805ad5);
+  background: linear-gradient(180deg, white, black);
 }
 
 /* Firefox Scrollbar Styles */
 * {
   scrollbar-width: thick;
-  scrollbar-color: linear-gradient(180deg, #4fd1c5, #6b46c1) #f1f1f1;
+  scrollbar-color: linear-gradient(180deg, white, black) silver;
+  font-family: Georgia, 'Times New Roman', Times, serif
 }

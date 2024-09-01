@@ -4,6 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { AddPhotoAlternateOutlined } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
   postPhoto?: FileList;
@@ -11,13 +12,7 @@ type Inputs = {
   tag: string;
 };
 
-const Posting = ({
-  post,
-  handlePublish,
-}: {
-  post: any;
-  handlePublish: any;
-}) => {
+const Posting = ({ post, apiEndPoint }: { post: any; apiEndPoint: any }) => {
   const {
     register,
     handleSubmit,
@@ -27,13 +22,39 @@ const Posting = ({
     defaultValues: post,
   });
 
+  const router = useRouter();
+
   const postPhoto = watch("postPhoto");
 
+  const handlePublish = async (data: any) => {
+    try {
+      const post = new FormData();
+      post.append("creator", data.creator);
+      post.append("caption", data.caption);
+      post.append("tag", data.tag);
+      if (typeof data.postPhoto !== "string") {
+        post.append("postPhoto", data.postPhoto[0]);
+      } else {
+        post.append("postPhoto", data.postPhoto);
+      }
+
+      const response = await fetch(apiEndPoint, {
+        method: "POST",
+        body: post,
+      });
+      if (response.ok) {
+        router.push(`/profile/${data.creator}/posts`);
+      }
+    } catch (error: any) {
+      console.log("Create Post Failed", error.message);
+    }
+  };
+
   return (
-    <div className="flex justify-center items-center h-[90vh] bg-gradient-to-br from-teal-300 to-blue-400">
+    <div className="flex justify-center items-center h-[90vh] bg-gradient-to-br from-gray-100 to-gray-200">
       <form
         onSubmit={handleSubmit(handlePublish)}
-        className="flex flex-col gap-6 p-8 w-full max-w-lg rounded-lg shadow-lg bg-white"
+        className="flex flex-col gap-6 p-8 w-full max-w-lg rounded-lg shadow-lg bg-white border border-gray-300"
       >
         <label
           htmlFor="photo"

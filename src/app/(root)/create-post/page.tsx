@@ -5,16 +5,32 @@ import Posting from "@/components/Posting";
 import { useUser } from "@clerk/nextjs";
 import Loader from "@/components/Loader";
 
+// Define a type for the user data
+type UserData = {
+  _id?: string;
+};
+
 const CreatePost = () => {
   const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(true);
-  const [userData, setUserData] = useState<any>({});
+  const [userData, setUserData] = useState<UserData>({});
 
   const getUser = async () => {
     if (user?.id) {
-      const res = await fetch(`/api/user/${user.id}`);
-      const data = await res.json();
-      setUserData(data);
+      try {
+        const res = await fetch(`/api/user/${user.id}`);
+        if (res.ok) {
+          const data = await res.json();
+          setUserData(data);
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data", error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
       setLoading(false);
     }
   };
@@ -26,17 +42,17 @@ const CreatePost = () => {
   }, [user, isLoaded]);
 
   const postData = {
-    creator: userData?._id,
+    creator: userData?._id || "",
     caption: "",
     tag: "",
     postPhoto: null,
   };
 
-  return loading || !isLoaded ? (
+  return loading ? (
     <Loader />
   ) : (
-    <div>
-      <Posting post={postData} handlePublish={() => {}} />
+    <div className="p-4">
+      <Posting post={postData} apiEndPoint={'/api/post/new'} />
     </div>
   );
 };
