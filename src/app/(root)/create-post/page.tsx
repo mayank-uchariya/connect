@@ -51,8 +51,8 @@ const CreatePost = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div className="p-4">
-      <Posting post={postData} apiEndPoint={'/api/post/new'} />
+    <div>
+      <Posting post={postData} apiEndPoint={`/api/post/new`} />
     </div>
   );
 };

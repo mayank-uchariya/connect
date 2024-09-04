@@ -27,16 +27,14 @@ const page = () => {
   }, [id]);
 
   const postInfo = {
-    creatorId: postData?.creator?._id,
+    creator: postData?.creator?._id,
     caption: postData?.caption,
     tag: postData?.tag,
     postPhoto: postData?.postPhoto,
   }
 
-  console.log(postInfo)
-
   return loading ? <Loader/> : (
-    <div className="pt-6">
+    <div>
       <Posting post={postInfo} apiEndPoint={`/api/post/${id}`}/>
     </div>
   );

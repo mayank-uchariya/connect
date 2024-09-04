@@ -23,9 +23,9 @@ const Posting = ({ post, apiEndPoint }: { post: any; apiEndPoint: any }) => {
   });
 
   const router = useRouter();
-
-  const postPhoto = watch("postPhoto");
-
+  
+  const postPhoto : FileList | undefined = watch("postPhoto");
+  
   const handlePublish = async (data: any) => {
     try {
       const post = new FormData();
@@ -51,23 +51,23 @@ const Posting = ({ post, apiEndPoint }: { post: any; apiEndPoint: any }) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[90vh] bg-gradient-to-br from-gray-100 to-gray-200">
+    <div className="flex justify-center items-center h-[90vh] bg-gradient-to-br from-gray-400 to-gray-200">
       <form
         onSubmit={handleSubmit(handlePublish)}
-        className="flex flex-col gap-6 p-8 w-full max-w-lg rounded-lg shadow-lg bg-white border border-gray-300"
+        className="flex flex-col gap-6 p-8 w-full max-w-xl rounded-lg shadow-lg bg-white border border-gray-300"
       >
         <label
           htmlFor="photo"
-          className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-teal-500 transition-all"
+          className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-2 hover:border-teal-500 transition-all"
         >
-          {postPhoto && postPhoto.length > 0 ? (
-            typeof postPhoto[0] === "string" ? (
+          {postPhoto ? (
+            typeof postPhoto === "string" ? (
               <Image
-                src={postPhoto[0]}
+                src={postPhoto}
                 alt="post"
                 width={250}
                 height={200}
-                className="object-cover rounded-lg"
+                className="object-contain rounded-lg h-[10rem] w-[20rem]"
               />
             ) : (
               <Image
@@ -75,7 +75,7 @@ const Posting = ({ post, apiEndPoint }: { post: any; apiEndPoint: any }) => {
                 alt="post"
                 width={250}
                 height={200}
-                className="object-cover rounded-lg"
+                className="object-contain rounded-lg h-[10rem] w-[20rem]"
               />
             )
           ) : (

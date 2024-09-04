@@ -11,18 +11,20 @@ const Navbar: FC = () => {
   const [search, setSearch] = useState('');
 
   return (
-    <nav className="sticky top-0 p-4 flex justify-between items-center bg-white shadow-md z-10 font-['RL_DroidKufi','Founders Grotesk Mono Regular','Arial','Helvetica','sans-serif']">
+    <nav className="sticky top-0 p-4 flex justify-between items-center bg-white shadow-md z-10">
       {/* Search Section */}
-      <div className="flex items-center space-x-2 relative">
+      <div className="relative gap-2">
         <input
           type="text"
-          placeholder="Search people, posts, ..."
-          className="p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-800"
-          aria-label="Search"
+          className="w-full bg-gray-600 py-3 px-5 rounded-lg focus:outline-none text-white text-small-semibold"
+          placeholder="Search posts, people, ..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Search className="text-gray-700" />
+        <Search
+          className="absolute top-3 right-2 text-white cursor-pointer hover:text-pink-200"
+          onClick={() => search!==''?router.push(`/search/post/${search}`):router.push('/')}
+        />
       </div>
 
       {/* Create Post Button */}

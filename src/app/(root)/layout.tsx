@@ -4,6 +4,7 @@ import LeftSection from "@/components/LeftSection";
 import RightSection from "@/components/RightSection";
 import BottomBar from "@/components/BottomBar";
 import "../globals.css";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Connect",
@@ -19,17 +20,17 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className="bg-gray-100 font-sans text-gray-900">
-          <div className="flex min-h-screen">
-            <LeftSection />
-            <main className="flex-1 flex flex-col h-[calc(110vh-5rem)] overflow-auto">
-              <Navbar />
-              <div className="flex-shrink p-4">
-                {children}
+          <Suspense fallback={<div>Loading...</div>}>
+            <main className="flex min-h-screen">
+              <LeftSection />
+              <div className="flex-1 flex flex-col h-[calc(110vh-5rem)] overflow-auto">
+                <Navbar />
+                <div className="flex-shrink p-4">{children}</div>
+                <BottomBar />
               </div>
-              <BottomBar />
+              <RightSection />
             </main>
-            <RightSection />
-          </div>
+          </Suspense>
         </body>
       </html>
     </ClerkProvider>

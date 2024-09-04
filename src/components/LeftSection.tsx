@@ -10,12 +10,13 @@ import Loader from "./Loader";
 import Image from "next/image";
 import logo from "@/assets/connect.png";
 import { dark } from "@clerk/themes";
-import { UserType } from "../../type";
+import { useRouter } from "next/navigation";
 
 const LeftSection: FC = () => {
   const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(true);
-  const [userData, setUserData] = useState<UserType | null>(null);
+  const [userData, setUserData] = useState<any>({});
+  const router = useRouter();
 
   const getUser = async () => {
     if (user?.id) {
@@ -43,7 +44,7 @@ const LeftSection: FC = () => {
     },
     { href: "/people", label: "People", icon: <FaUsers className="text-xl" /> },
     {
-      href: `/profile/${userData?.clerkId}`,
+      href: `/profile/${userData?._id}/posts`,
       label: "Edit Profile",
       icon: <FaUserEdit className="text-xl" />,
     },
@@ -120,7 +121,9 @@ const LeftSection: FC = () => {
       {/* Sign Out Button (Optional) */}
       <div className="mt-2 flex items-center justify-between">
         <SignOutButton>
-          <button className="flex text-sm items-center gap-2 bg-gray-300 text-gray-800 px-2 py-[4px] rounded-lg hover:bg-gray-400 transition-colors">
+          <button className="flex text-sm items-center gap-2 bg-gray-300 text-gray-800 px-2 py-[4px] rounded-lg hover:bg-gray-400 transition-colors"
+          onClick={()=>router.push('/sign-in')}
+          >
             <Logout />
             <span>Sign Out</span>
           </button>

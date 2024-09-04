@@ -1,18 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaHome, FaPen, FaUsers, FaUserEdit } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const BottomBar = () => {
+  const { user, isLoaded } = useUser();
+  const [userData, setUserData] = useState<any>({});
+
+  const getUser = async () => {
+    if (user?.id) {
+      const res = await fetch(`/api/user/${user.id}`);
+      const data = await res.json();
+      setUserData(data);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      getUser();
+    }
+  }, [user, isLoaded]);
+  
   const pathname = usePathname();
 
   const links = [
     { href: "/", label: "Home", icon: <FaHome className="text-2xl" /> },
     { href: "/create-post", label: "Create Post", icon: <FaPen className="text-2xl" /> },
-    { href: "/edit-post", label: "People", icon: <FaUsers className="text-2xl" /> },
-    { href: "/profile", label: "Edit Profile", icon: <FaUserEdit className="text-2xl" /> },
+    { href: "/people", label: "People", icon: <FaUsers className="text-2xl" /> },
+    { href: `/profile/${userData?._id}`, label: "Edit Profile", icon: <FaUserEdit className="text-2xl" /> },
   ];
 
   return (

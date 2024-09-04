@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { PostType } from "../../../type";
 
-const PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema<PostType>({
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
