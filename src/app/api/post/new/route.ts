@@ -1,5 +1,5 @@
 import Post from "@/lib/models/Post"
-import User from "@/lib/models/Users"
+import User from "@/lib/models/User"
 import { connectToDB } from "@/lib/mongodb/mongoose"
 import { writeFile } from "fs/promises"
 

@@ -1,4 +1,4 @@
-import User from "@/lib/models/Users"
+import User from "@/lib/models/User"
 import { connectToDB } from "@/lib/mongodb/mongoose"
 
 export const POST = async (req:any, { params }:any) => {

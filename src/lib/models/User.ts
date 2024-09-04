@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { UserType } from "../../../type";
 
-const UserSchema = new mongoose.Schema<UserType>({
+const UserSchema = new mongoose.Schema({
   clerkId: {
     type: String,
     required: true,
@@ -28,23 +28,23 @@ const UserSchema = new mongoose.Schema<UserType>({
     required: true,
   },
   posts: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
     default: [],
   },
   savedPosts: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
     default: [],
   },
   likedPosts: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
     default: [],
   },
   followers: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     default: [],
   },
   following: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     default: [],
   },
   createdAt: {

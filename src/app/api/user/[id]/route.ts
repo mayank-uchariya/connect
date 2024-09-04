@@ -1,5 +1,5 @@
 import { connectToDB } from "@/lib/mongodb/mongoose";
-import User from "@/lib/models/Users";
+import User from "@/lib/models/User";
 
 export const GET = async (req: Request, { params }: any) => {
     try {
