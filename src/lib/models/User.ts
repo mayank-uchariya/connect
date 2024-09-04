@@ -28,23 +28,23 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   posts: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
     default: [],
   },
   savedPosts: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
     default: [],
   },
   likedPosts: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
     default: [],
   },
   followers: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     default: [],
   },
   following: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     default: [],
   },
   createdAt: {
@@ -53,6 +53,6 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.models.User || mongoose.model<UserType>('Post', UserSchema);
+const User = mongoose.models.User || mongoose.model<UserType>("Post", UserSchema);
 
 export default User;

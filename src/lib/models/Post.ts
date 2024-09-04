@@ -4,7 +4,7 @@ import { PostType } from "../../../type";
 const PostSchema = new mongoose.Schema({
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   caption: {
@@ -20,7 +20,7 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   likes: {
-    type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    type: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     default: [],
   },
   createdAt: {
@@ -29,6 +29,6 @@ const PostSchema = new mongoose.Schema({
   },
 })
 
-const Post = mongoose.models.Post || mongoose.model<PostType>('Post',PostSchema)
+const Post = mongoose.models.Post || mongoose.model<PostType>("Post",PostSchema)
 
 export default Post;
