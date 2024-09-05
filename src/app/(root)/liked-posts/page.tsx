@@ -24,7 +24,7 @@ const LikedPosts = () => {
     if (user) {
       getUser();
     }
-  }, [user]);
+  }, [user,getUser]);
 
   return loading || !isLoaded ? (
     <Loader />

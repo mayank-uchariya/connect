@@ -36,10 +36,8 @@ const CreatePost = () => {
   };
 
   useEffect(() => {
-    if (isLoaded) {
       getUser();
-    }
-  }, [user, isLoaded]);
+  }, [user]);
 
   const postData = {
     creator: userData?._id || "",

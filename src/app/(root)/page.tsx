@@ -40,7 +40,7 @@ const Home = () => {
     } else {
       getFeedPost();
     }
-  }, [user]);
+  }, [user,isLoaded,router]);
 
   return loading || !isLoaded ? (
     <Loader />

@@ -5,7 +5,7 @@ import Posting from "@/components/Posting";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const EditPost = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [postData, setPostData] = useState<any>({});
@@ -41,4 +41,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default EditPost;

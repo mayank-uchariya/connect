@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const searchPost = () => {
+const SearchPost = () => {
   const { query } = useParams();
   const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(true);
@@ -66,4 +66,4 @@ const searchPost = () => {
   );
 };
 
-export default searchPost;
+export default SearchPost;
