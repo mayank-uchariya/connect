@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaHome, FaPen, FaUsers, FaUserEdit } from "react-icons/fa";
+import { FaBookmark, FaHeart, FaHome, FaPen, FaUsers } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 
@@ -23,14 +23,31 @@ const BottomBar = () => {
       getUser();
     }
   }, [user, isLoaded]);
-  
+
   const pathname = usePathname();
 
   const links = [
     { href: "/", label: "Home", icon: <FaHome className="text-2xl" /> },
-    { href: "/create-post", label: "Create Post", icon: <FaPen className="text-2xl" /> },
-    { href: "/people", label: "People", icon: <FaUsers className="text-2xl" /> },
-    { href: `/profile/${userData?._id}`, label: "Edit Profile", icon: <FaUserEdit className="text-2xl" /> },
+    {
+      href: "/create-post",
+      label: "Create Post",
+      icon: <FaPen className="text-2xl" />,
+    },
+    {
+      href: "/people",
+      label: "People",
+      icon: <FaUsers className="text-2xl" />,
+    },
+    {
+      icon: <FaBookmark className="text-xl" />,
+      href: "/saved-posts",
+      label: "Saved Posts",
+    },
+    {
+      icon: <FaHeart className="text-xl" />,
+      href: "/liked-posts",
+      label: "Liked Posts",
+    },
   ];
 
   return (

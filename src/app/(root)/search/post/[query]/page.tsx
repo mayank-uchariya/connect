@@ -33,13 +33,11 @@ const searchPost = () => {
     },
   ];
 
-  console.log(pathname)
-
   return loading || !isLoaded ? (
     <Loader />
   ) : (
-    <div className="flex flex-col gap-10 bg-white p-4 justify-center items-center">
-      <div className="flex gap-6">
+    <div className="flex flex-col gap-10 bg-white p-4 justify-center items-center ">
+      <div className="flex gap-6 pb-4 border-b-[1px] border-black w-full justify-center">
         {links.map((item:any, index:any) => (
           <Link
           className={`tab text-xl font-semibold transition-colors ${
@@ -54,14 +52,14 @@ const searchPost = () => {
           </Link>
         ))}
       </div>
-      {links.length!==0 || <p>No Posts Found</p>}
+      {searchPost.length===0 && <p>No Posts Found</p>}
       {searchPost.map((post: any) => (
         <PostCard
           key={post._id}
           post={post}
           creator={post.creator}
           loggedInUser={user} 
-          update={undefined}        
+          update={getSearchPost}        
           />
       ))}
     </div>

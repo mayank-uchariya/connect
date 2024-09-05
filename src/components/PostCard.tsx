@@ -22,8 +22,6 @@ const PostCard = ({
   update:any
 }) => {
 
-  console.log(creator)
-
   const [userData, setUserData] = useState<any>({});
 
   const getUser = async () => {
@@ -75,6 +73,7 @@ const PostCard = ({
     });
     update();
   };
+  
   return (
     <div className="w-full max-w-2xl rounded-lg flex flex-col gap-4 bg-gray-800 p-5 max-sm:gap-2">
       <div className="flex justify-between">
@@ -85,7 +84,7 @@ const PostCard = ({
               alt="profile photo"
               width={50}
               height={50}
-              className="rounded-full"
+              className="rounded-full h-[3.5rem] w-[3.5rem] object-cover"
             />
             <div className="flex flex-col gap-1">
               <p className="text-small-semibold text-white">

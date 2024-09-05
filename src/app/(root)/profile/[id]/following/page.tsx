@@ -6,7 +6,7 @@ import UserCard from "@/components/UserCard";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const Followers = () => {
+const Following = () => {
   const { id } = useParams();
 
   const [loading, setLoading] = useState(true);
@@ -33,10 +33,10 @@ const Followers = () => {
     <Loader />
   ) : (
     <div className="flex flex-col gap-9">
-      <ProfileCard userData={userData} activeTab="Followers" />
+      <ProfileCard userData={userData} activeTab="Following" />
 
       <div className="flex flex-col gap-9">
-        {userData?.followers?.map((person:any) => (
+        {userData?.following?.map((person:any) => (
           <UserCard key={person._id} userData={person} update={getUser}/>
         ))}
       </div>
@@ -44,4 +44,4 @@ const Followers = () => {
   );
 };
 
-export default Followers;
+export default Following;

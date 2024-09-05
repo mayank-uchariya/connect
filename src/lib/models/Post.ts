@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { PostType } from "../../../type";
 
 const PostSchema = new mongoose.Schema({
   creator: {
@@ -29,6 +28,6 @@ const PostSchema = new mongoose.Schema({
   },
 })
 
-const Post = mongoose.models.Post || mongoose.model<PostType>("Post", PostSchema);
+const Post = mongoose.models.Post || mongoose.model("Post", PostSchema);
 
 export default Post;

@@ -39,9 +39,6 @@ const Navbar: FC = () => {
 
       {/* User and Profile Section (for mobile view) */}
       <div className="flex gap-4 md:hidden">
-        <Link href={`/`}>
-          <Person sx={{ fontSize: "35px", color: "gray" }} />
-        </Link>
         <UserButton afterSwitchSessionUrl="/sign-in" />
       </div>
     </nav>

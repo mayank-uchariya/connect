@@ -39,9 +39,7 @@ const ProfileCard = ({
     }
   }, [user]);
 
-  const isFollowing = userInfo?.following?.find(
-    (item:any) => item?._id === userData?._id
-  );
+  const isFollowing = userInfo?.following?.find((item: any) => item?._id === userData?._id);
 
   const handleFollow = async () => {
     const response = await fetch(
@@ -68,16 +66,14 @@ const ProfileCard = ({
             alt="profile photo"
             width={100}
             height={100}
-            className="rounded-full md:max-lg:hidden"
+            className="rounded-full md:max-lg:hidden h-[3.5rem] w-[3.5rem] object-cover"
           />
 
           <div className="flex flex-col gap-3">
             <p className=" text-2xl max-sm:text-xl">
               {userData?.firstName} {userData?.lastName}
             </p>
-            <p className=" text-subtle-semibold">
-              @{userData?.username}
-            </p>
+            <p className=" text-subtle-semibold">@{userData?.username}</p>
             <div className="flex gap-7 text-small-bold max-sm:gap-4">
               <div className="flex flex-col gap-2 items-center max-sm:gap-0.5">
                 <p className="">{userData?.posts?.length}</p>
@@ -95,7 +91,7 @@ const ProfileCard = ({
           </div>
         </div>
 
-        {user?.id !== userData.clerkId &&
+        {user?.id !== userData?.clerkId &&
           (isFollowing ? (
             <PersonRemove
               sx={{ color: "#7857FF", cursor: "pointer", fontSize: "40px" }}
@@ -110,12 +106,15 @@ const ProfileCard = ({
       </div>
 
       <div className="flex gap-6">
-        {tabs.map((tab:any) => (
+        {tabs.map((tab: any) => (
           <Link
+            key={tab.name}
             className={`tab px-4 py-2 rounded-2xl border-[1px] border-black shadow-md ${
-              activeTab === tab.name ? "bg-white text-black" : "bg-black text-white "
+              activeTab === tab.name
+                ? "bg-white text-black"
+                : "bg-black text-white "
             }`}
-            href={`/profile/${userData._id}/${tab.link}`}
+            href={`/profile/${userData?._id}/${tab.link}`}
           >
             {tab.name}
           </Link>

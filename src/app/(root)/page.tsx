@@ -55,7 +55,7 @@ const Home = () => {
               post={post}
               creator={post.creator}
               loggedInUser={user} 
-              update={undefined}
+              update={getFeedPost}
             />
           ))
         ) : (

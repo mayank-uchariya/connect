@@ -51,7 +51,7 @@ const Posting = ({ post, apiEndPoint }: { post: any; apiEndPoint: any }) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[90vh] bg-gradient-to-br from-gray-400 to-gray-200">
+    <div className="flex justify-center items-center h-[90vh]">
       <form
         onSubmit={handleSubmit(handlePublish)}
         className="flex flex-col gap-6 p-8 w-full max-w-xl rounded-lg shadow-lg bg-white border border-gray-300"

@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
-import { UserType } from "../../../type";
 
 const UserSchema = new mongoose.Schema({
   clerkId: {
     type: String,
     required: true,
-    uinque: true,
+    unique: true,
   },
   firstName: {
     type: String,
@@ -53,6 +52,6 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.models.User || mongoose.model<UserType>("User", UserSchema);
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
 export default User;

@@ -10,7 +10,6 @@ import React, { useEffect, useState } from "react";
 
 const searchPeople = () => {
   const { query } = useParams();
-  const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(true);
   const [searchPeople, setSearchPeople] = useState<any>({});
   const pathname = usePathname();
@@ -34,13 +33,11 @@ const searchPeople = () => {
     },
   ];
 
-  console.log(pathname);
-
-  return loading || !isLoaded ? (
+  return loading ? (
     <Loader />
   ) : (
-    <div className="flex flex-col gap-10 bg-white p-4 ">
-      <div className="flex gap-6 justify-center items-center">
+    <div className="flex flex-col gap-10 bg-white p-4">
+      <div className="flex gap-6 pb-4 border-b-[1px] border-black w-full justify-center">
         {links.map((item: any, index: any) => (
           <Link
             className={`tab text-xl font-semibold transition-colors ${
@@ -55,9 +52,9 @@ const searchPeople = () => {
           </Link>
         ))}
       </div>
-      {links.length !== 0 || <p>No People Found</p>}
+      {searchPeople.length === 0 && <p className="text-center">No People Found</p>}
       {searchPeople.map((people: any) => (
-        <UserCard key={people._id} userData={people} update={undefined} />
+        <UserCard key={people._id} userData={people} update={getSearchPeople} />
       ))}
     </div>
   );

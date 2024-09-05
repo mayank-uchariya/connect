@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Logout } from "@mui/icons-material";
-import { FaHome, FaPen, FaUsers, FaUserEdit } from "react-icons/fa";
+import { BookmarksOutlined, FavoriteBorder, Logout } from "@mui/icons-material";
+import { FaHome, FaPen, FaUsers, FaBookmark, FaHeart } from "react-icons/fa";
 import { UserButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Loader from "./Loader";
 import Image from "next/image";
@@ -44,9 +44,14 @@ const LeftSection: FC = () => {
     },
     { href: "/people", label: "People", icon: <FaUsers className="text-xl" /> },
     {
-      href: `/profile/${userData?._id}/posts`,
-      label: "Edit Profile",
-      icon: <FaUserEdit className="text-xl" />,
+      icon: <FaBookmark className="text-xl"/>,
+      href: "/saved-posts",
+      label: "Saved Posts",
+    },
+    {
+      icon: <FaHeart className="text-xl"/>,
+      href: "/liked-posts",
+      label: "Liked Posts",
     },
   ];
 
@@ -57,19 +62,19 @@ const LeftSection: FC = () => {
   return (
     <aside className="bg-white h-screen p-6 text-gray-800 w-64 flex flex-col space-y-6 shadow-lg max-md:hidden">
       {/* Logo/Title Section */}
-      <div className="text-gray-700 text-3xl font-bold mb-2 flex items-center space-x-2 pb-4 border-b-[1px] border-gray-300 justify-center">
+      <div className="text-gray-700 text-3xl font-bold flex items-center space-x-2 pb-4 border-b-[1px] border-gray-300 justify-center">
         <Image src={logo} alt="logo" width={32} height={32} />
         <span>Connect</span>
       </div>
 
       {/* Profile Section */}
-      <div className="flex flex-col items-center mb-6 pb-4 border-b-[1px] border-gray-300">
+      <div className="flex flex-col items-center mb-4 pb-4 border-b-[1px] border-gray-300">
         <Image
           src={userData?.profilePhoto as string}
           alt="User-profile"
           width={64}
           height={64}
-          className="border-2 border-gray-300 rounded-full mb-4"
+          className="border-2 border-black rounded-full mb-4 h-[3.5rem] w-[3.5rem] object-cover"
         />
         <p className="mb-2 font-semibold text-gray-700">
           {userData?.firstName} {userData?.lastName}
@@ -91,7 +96,7 @@ const LeftSection: FC = () => {
       </div>
 
       {/* Navigation Links */}
-      <ul className="space-y-4 pb-4 border-b-[1px] border-gray-300">
+      <ul className="space-y-4 pb-2 border-b-[1px] border-gray-300">
         {links.map((link) => (
           <li key={link.href}>
             <Link
@@ -116,18 +121,6 @@ const LeftSection: FC = () => {
           afterSignOutUrl="/sign-in/"
         />
         <p className="text-gray-600 text-body-bold">Manage Account</p>
-      </div>
-
-      {/* Sign Out Button (Optional) */}
-      <div className="mt-2 flex items-center justify-between">
-        <SignOutButton>
-          <button className="flex text-sm items-center gap-2 bg-gray-300 text-gray-800 px-2 py-[4px] rounded-lg hover:bg-gray-400 transition-colors"
-          onClick={()=>router.push('/sign-in')}
-          >
-            <Logout />
-            <span>Sign Out</span>
-          </button>
-        </SignOutButton>
       </div>
     </aside>
   );

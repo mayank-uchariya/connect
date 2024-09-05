@@ -11,14 +11,14 @@ export const POST = async (req:any, { params }:any) => {
     const user = await User.findOne({ clerkId: userId }).populate("posts savedPosts likedPosts followers following")
     const personToFollow = await User.findById(followId).populate("posts savedPosts likedPosts followers following")
 
-    const isFollowing = user?.following.find((item:any) => item._id.toString() === followId)
+    const isFollowing = user?.following?.find((item:any) => item._id.toString() === followId)
 
     if (isFollowing) {
-      user.following = user.following.filter((item:any) => item._id.toString() !== followId)
-      personToFollow.followers = personToFollow.followers.filter((item:any) => item._id.toString() !== user._id.toString())
+      user.following = user?.following?.filter((item:any) => item._id.toString() !== followId)
+      personToFollow.followers = personToFollow?.followers?.filter((item:any) => item._id.toString() !== user._id.toString())
     } else {
-      user.following.push(personToFollow)
-      personToFollow.followers.push(user)
+      user?.following?.push(personToFollow)
+      personToFollow?.followers?.push(user)
     }
 
     await user.save()
