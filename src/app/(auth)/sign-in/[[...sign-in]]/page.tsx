@@ -1,6 +1,27 @@
-import { SignIn } from "@clerk/nextjs";
+"use client"
+import { SignIn, useUser } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
- 
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 export default function Page() {
-  return <SignIn appearance={{ baseTheme: dark }} />;
+  const router = useRouter();
+  const { isSignedIn } = useUser();
+
+  useEffect(() => {
+    localStorage.removeItem("Item")
+    if (isSignedIn) {
+      console.log("User signed in!");
+      localStorage.setItem("Item", "True")
+      router.push("/");
+    }
+  }, [isSignedIn, router]);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <SignIn
+        appearance={{ baseTheme: dark }}
+      />
+    </div>
+  )
 }

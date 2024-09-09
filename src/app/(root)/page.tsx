@@ -3,13 +3,14 @@
 import Loader from "@/components/Loader";
 import PostCard from "@/components/PostCard";
 import React, { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 const Home = () => {
-  const { user, isLoaded } = useUser();
+  const { user, isLoaded , isSignedIn } = useUser();
   const [loading, setLoading] = useState(true);
   const [feedPost, setFeedPost] = useState<any[]>([]);
+  const { signOut } = useClerk();
   const router = useRouter();
 
   const getFeedPost = async () => {
@@ -33,14 +34,15 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (!user) {
-      if (isLoaded) {  // Ensure that the user data has finished loading
-        router.push('/sign-in'); // Redirect to sign-in if the user is not authenticated
-      } else {
-        getFeedPost(); // Fetch posts if the user is signed in
+    if(isSignedIn){
+      getFeedPost();
+    }
+    else{
+      if(!localStorage.getItem("Item")){
+        router.push('/sign-in');
       }
     }
-  }, [user, isLoaded, router]);
+  }, [isSignedIn]);
 
   return loading || !isLoaded ? (
     <Loader />
