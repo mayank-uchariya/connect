@@ -29,9 +29,10 @@ const LikedPosts = () => {
   return loading || !isLoaded ? (
     <Loader />
   ) : (
-    <div className="bg-white">
+    <div className="bg-gray-50">
       <h1 className="text-2xl font-bold underline p-4">Liked Posts</h1>
       <div className="flex flex-col gap-9 items-center p-4">
+      {userData?.likedPosts?.length===0 && <p className="font-semibold text-lg">No Liked posts yet!</p>}
         {userData?.likedPosts?.map((post: any) => (
           <PostCard
             key={post._id}

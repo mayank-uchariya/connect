@@ -51,7 +51,7 @@ const BottomBar = () => {
   ];
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 shadow-lg font-['RL_DroidKufi','Founders Grotesk Mono Regular','Arial','Helvetica','sans-serif']">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#FFD700] shadow-lg">
       <ul className="flex justify-around py-2">
         {links.map((link) => (
           <li key={link.href} className="flex-1">
@@ -59,12 +59,11 @@ const BottomBar = () => {
               href={link.href}
               className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors ${
                 pathname === link.href
-                  ? "bg-gray-300 text-gray-800"
-                  : "hover:bg-gray-100 hover:text-gray-700"
+                  ? "bg-teal-500 text-white"
+                  : "hover:bg-teal-200 hover:text-gray-900"
               }`}
             >
               {link.icon}
-              <span className="text-xs text-gray-700">{link.label}</span>
             </Link>
           </li>
         ))}

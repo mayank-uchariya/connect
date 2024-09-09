@@ -1,37 +1,27 @@
-import { FC } from 'react';
-import { FaTag, FaUserPlus } from 'react-icons/fa';
+import Image from "next/image";
+import React from "react";
 
-const RightSection: FC = () => {
+const RightSideBar = () => {
   return (
-    <aside className="bg-white h-screen p-6 w-72 flex flex-col space-y-6 shadow-lg max-xl:hidden">
-      
-      {/* Friend Suggestions Section */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-700 mb-4 flex items-center space-x-2">
-          <FaUserPlus className="text-2xl text-gray-600" />
-          <span>Friend Suggestions</span>
-        </h2>
-        <ul className="space-y-3">
-          <li className="bg-gray-200 p-4 rounded-lg shadow-lg hover:bg-gray-300 transition-colors flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-800">John Doe</span>
-            <button className="text-blue-500 hover:text-blue-700 font-semibold">Add</button>
-          </li>
-          <li className="bg-gray-200 p-4 rounded-lg shadow-lg hover:bg-gray-300 transition-colors flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-800">Jane Smith</span>
-            <button className="text-blue-500 hover:text-blue-700 font-semibold">Add</button>
-          </li>
-          <li className="bg-gray-200 p-4 rounded-lg shadow-lg hover:bg-gray-300 transition-colors flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-800">Emily Johnson</span>
-            <button className="text-blue-500 hover:text-blue-700 font-semibold">Add</button>
-          </li>
-          <li className="bg-gray-200 p-4 rounded-lg shadow-lg hover:bg-gray-300 transition-colors flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-800">Michael Brown</span>
-            <button className="text-blue-500 hover:text-blue-700 font-semibold">Add</button>
-          </li>
-        </ul>
+    <div className="sticky right-0 top-0 z-20 h-screen w-[300px] xl:w-[350px] flex flex-col gap-12 overflow-auto pl-6 pr-10 py-6 max-lg:hidden">
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl font-semibold">Sponsored</h3>
+        <Image
+          src="/ad.jpg"
+          alt="ad"
+          width={280}
+          height={200}
+          className="rounded-lg"
+        />
+        <p className="font-medium text-lg">Febreze Air Freshener</p>
+        <p className="text-md">
+          Instant odor fighting and a burst of freshness. Amazing summer scent.
+          It is so light and fruity and if you are a scent person it has major
+          happy vibes.
+        </p>
       </div>
-    </aside>
+    </div>
   );
 };
 
-export default RightSection;
+export default RightSideBar;

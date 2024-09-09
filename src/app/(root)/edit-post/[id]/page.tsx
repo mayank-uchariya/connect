@@ -34,7 +34,7 @@ const EditPost = () => {
   }
 
   return loading ? <Loader/> : (
-    <div className="bg-gradient-to-br from-gray-400 to-gray-200">
+    <div className="bg-gray-50">
       <h1 className="text-2xl font-bold underline p-4">Edit Post</h1>
       <Posting post={postInfo} apiEndPoint={`/api/post/${id}`}/>
     </div>

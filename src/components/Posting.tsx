@@ -51,14 +51,14 @@ const Posting = ({ post, apiEndPoint }: { post: any; apiEndPoint: any }) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[90vh]">
+    <div className="flex justify-center h-[90vh] max-md:h-[60vh]">
       <form
         onSubmit={handleSubmit(handlePublish)}
-        className="flex flex-col gap-6 p-8 w-full max-w-xl rounded-lg shadow-lg bg-white border border-gray-300"
+        className="flex flex-col gap-6 max-md:gap-4 p-8 w-full max-w-xl rounded-lg shadow-lg bg-white border border-[#FFD700]"
       >
         <label
           htmlFor="photo"
-          className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-2 hover:border-teal-500 transition-all"
+          className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-border-[#FFD700] rounded-lg p-2 hover:border-teal-500 transition-all"
         >
           {postPhoto ? (
             typeof postPhoto === "string" ? (

@@ -75,7 +75,7 @@ const PostCard = ({
   };
   
   return (
-    <div className="w-full max-w-2xl rounded-lg flex flex-col gap-4 bg-gray-800 p-5 max-sm:gap-2">
+    <div className="w-full max-w-2xl rounded-lg flex flex-col gap-4 bg-white p-5 max-sm:gap-2 border border-[#FFD700]">
       <div className="flex justify-between">
         <Link href={`/profile/${creator._id}/posts`}>
           <div className="flex gap-3 items-center">
@@ -84,13 +84,13 @@ const PostCard = ({
               alt="profile photo"
               width={50}
               height={50}
-              className="rounded-full h-[3.5rem] w-[3.5rem] object-cover"
+              className="rounded-full h-[3.5rem] w-[3.5rem] object-cover max-md:h-[2.5rem] max-md:w-[2.5rem]"
             />
             <div className="flex flex-col gap-1">
-              <p className="text-small-semibold text-white">
+              <p className="text-small-semibold">
                 {creator?.firstName} {creator?.lastName}
               </p>
-              <p className="text-subtle-medium text-white">
+              <p className="text-subtle-medium">
                 @{creator?.username}
               </p>
             </div>
@@ -99,12 +99,12 @@ const PostCard = ({
 
         {loggedInUser?.id === creator.clerkId && (
           <Link href={`/edit-post/${post._id}`}>
-            <BorderColor sx={{ color: "white", cursor: "pointer" }} />
+            <BorderColor sx={{ color: "black", cursor: "pointer" }} />
           </Link>
         )}
       </div>
 
-      <p className="text-body-normal text-white max-sm:text-small-normal">
+      <p className="text-body-normal max-sm:text-small-normal">
         {post?.caption}
       </p>
 
@@ -113,10 +113,10 @@ const PostCard = ({
         alt="post photo"
         width={200}
         height={150}
-        className="rounded-lg w-full h-[25rem]"
+        className="rounded-lg w-full h-[25rem] max-md:h-[15rem]"
       />
 
-      <p className="text-base-semibold text-white max-sm:text-small-normal">
+      <p className="text-base-semibold max-sm:text-small-normal">
         {post?.tag}
       </p>
 
@@ -124,7 +124,7 @@ const PostCard = ({
         <div className="flex gap-2 items-center">
           {!isLiked ? (
             <FavoriteBorder
-              sx={{ color: "white", cursor: "pointer" }}
+              sx={{ color: "black", cursor: "pointer" }}
               onClick={() => handleLike()}
             />
           ) : (
@@ -133,7 +133,7 @@ const PostCard = ({
               onClick={() => handleLike()}
             />
           )}
-          <p className="text-white">{post.likes.length}</p>
+          <p className="">{post.likes.length}</p>
         </div>
 
         {loggedInUser?.id !== creator?.clerkId &&
@@ -144,14 +144,14 @@ const PostCard = ({
             />
           ) : (
             <BookmarkBorder
-              sx={{ color: "white", cursor: "pointer" }}
+              sx={{ color: "black", cursor: "pointer" }}
               onClick={() => handleSave()}
             />
           ))}
 
         {loggedInUser?.id === creator?.clerkId && (
           <Delete
-            sx={{ color: "white", cursor: "pointer" }}
+            sx={{ color: "black", cursor: "pointer" }}
             onClick={() => handleDelete()}
           />
         )}

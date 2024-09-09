@@ -13,28 +13,28 @@ const Navbar: FC = () => {
   return (
     <nav className="sticky top-0 p-4 flex justify-between items-center bg-white shadow-md z-10">
       {/* Search Section */}
-      <div className="relative gap-2">
+      <div className="relative gap-4 flex justify-center items-center">
         <input
           type="text"
-          className="w-full bg-gray-600 py-3 px-5 rounded-lg focus:outline-none text-white text-small-semibold"
+          className="w-full bg-white py-2 px-5 rounded-lg focus:outline-none text-small-semibold border border-[#FFD700]"
           placeholder="Search posts, people, ..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <Search
-          className="absolute top-3 right-2 text-white cursor-pointer hover:text-pink-200"
+          className="absolute top-2 right-2 text-white cursor-pointer hover:text-teal-200"
           onClick={() => search!==''?router.push(`/search/post/${search}`):router.push('/')}
         />
       </div>
 
       {/* Create Post Button */}
       <button
-        className="bg-gray-300 text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-400 hover:text-gray-900 transition-colors flex items-center gap-2 max-md:hidden"
+        className="bg-teal-500 text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-teal-200 hover:text-gray-900 transition-colors flex items-center gap-2 max-md:hidden"
         onClick={() => router.push("/create-post")}
         aria-label="Create A Post"
       >
-        <Add className="text-gray-800" />
-        <span className="max-lg:hidden">Create A Post</span>
+        <Add className="text-white" />
+        <span className="max-lg:hidden text-white">Create A Post</span>
       </button>
 
       {/* User and Profile Section (for mobile view) */}

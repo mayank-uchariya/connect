@@ -61,7 +61,7 @@ const UserCard = ({ userData, update } : {userData:any , update:any}) => {
           alt="profile photo"
           width={50}
           height={50}
-          className="rounded-full h-[3.5rem] w-[3.5rem] object-cover"
+          className="rounded-full h-[3.5rem] w-[3.5rem] object-cover max-md:h-[2.5rem] max-md:w-[2.5rem]"
         />
         <div className="flex flex-col gap-1">
           <p className="text-small-semibold text-light-1">

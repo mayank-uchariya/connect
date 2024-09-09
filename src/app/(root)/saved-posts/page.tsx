@@ -29,9 +29,10 @@ const SavedPosts = () => {
   return loading || !isLoaded ? (
     <Loader />
   ) : (
-    <div className="bg-white">
+    <div className="bg-gray-50">
       <h1 className="text-2xl font-bold underline p-4">Saved-Post</h1>
       <div className="flex flex-col gap-9 items-center p-4">
+        {userData?.savedPosts?.length===0 && <p className="font-semibold text-lg">No Saved posts yet!</p>}
         {userData?.savedPosts?.map((post: any) => (
           <PostCard
             key={post._id}

@@ -23,11 +23,13 @@ const People = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div className="bg-white">
+    <div className="bg-gray-50">
       <h1 className="text-2xl font-bold underline p-4">People</h1>
       <div className="flex flex-col gap-4 p-6">
         {allUsers?.map((user: any) => (
-          <UserCard key={user.id} userData={user} update={getAllUsers} />
+          <div className="border-b border-[#FFD700] pb-4">
+            <UserCard key={user.id} userData={user} update={getAllUsers} />
+          </div>
         ))}
       </div>
     </div>

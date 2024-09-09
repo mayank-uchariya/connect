@@ -33,19 +33,19 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (!user) {
-      if(!isLoaded){
-        router.push(`/sign-in`);
+    if (isLoaded) {  // Ensure that the user data has finished loading
+      if (!user) {
+        router.push('/sign-in'); // Redirect to sign-in if the user is not authenticated
+      } else {
+        getFeedPost(); // Fetch posts if the user is signed in
       }
-    } else {
-      getFeedPost();
     }
-  }, [user,isLoaded,router]);
+  }, [user, isLoaded, router]); 
 
   return loading || !isLoaded ? (
     <Loader />
   ) : (
-    <div className="min-h-screen w-full bg-white text-gray-800">
+    <div className="min-h-screen w-full bg-gray-50 text-gray-800">
       <h1 className="text-2xl font-bold underline p-4">Feed</h1>
       <div className="flex flex-wrap justify-center p-6 gap-6">
         {feedPost.length > 0 ? (
@@ -54,7 +54,7 @@ const Home = () => {
               key={post._id}
               post={post}
               creator={post.creator}
-              loggedInUser={user} 
+              loggedInUser={user}
               update={getFeedPost}
             />
           ))

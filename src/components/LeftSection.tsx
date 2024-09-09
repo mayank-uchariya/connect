@@ -56,7 +56,11 @@ const LeftSection: FC = () => {
   ];
 
   if (loading || !isLoaded) {
-    return <Loader />;
+    return(
+      <div className="loader max-md:hidden">
+        <Loader />;
+      </div>
+    ) 
   }
 
   return (
@@ -103,8 +107,8 @@ const LeftSection: FC = () => {
               href={link.href}
               className={`flex items-center space-x-3 p-2 rounded-lg transition-colors ${
                 pathname === link.href
-                  ? "bg-gray-200 text-gray-900"
-                  : "hover:bg-gray-100 hover:text-gray-900"
+                  ? "bg-teal-500 text-white"
+                  : "hover:bg-teal-200 hover:text-gray-900"
               }`}
             >
               {link.icon}
