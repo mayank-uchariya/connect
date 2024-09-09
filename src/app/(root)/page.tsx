@@ -33,14 +33,14 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (isLoaded) {  // Ensure that the user data has finished loading
-      if (!user) {
+    if (!user) {
+      if (isLoaded) {  // Ensure that the user data has finished loading
         router.push('/sign-in'); // Redirect to sign-in if the user is not authenticated
       } else {
         getFeedPost(); // Fetch posts if the user is signed in
       }
     }
-  }, [user, isLoaded, router]); 
+  }, [user, isLoaded, router]);
 
   return loading || !isLoaded ? (
     <Loader />
