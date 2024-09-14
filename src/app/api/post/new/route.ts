@@ -29,7 +29,7 @@ export const POST = async (req:any) => {
     postPhoto = `/uploads/${postPhoto.name}`
 
     const newPost = await Post.create({
-      creator: data.get("creator"),
+      creator: data.get("creatorId"),
       caption: data.get("caption"),
       tag: data.get("tag"),
       postPhoto: postPhoto
@@ -37,17 +37,16 @@ export const POST = async (req:any) => {
 
     await newPost.save()
 
+    // Update the user's posts array
     await User.findByIdAndUpdate(
-      data.get("creator"),
+      data.get("creatorId"),
       { $push: { posts: newPost._id } },
       { new: true, useFindAndModify: false }
     )
 
     return new Response(JSON.stringify(newPost), { status: 200 })
-
   } catch (err) {
     console.error(err)
     return new Response("Failed to create a new post", { status: 500 })
-
   }
 }
