@@ -73,6 +73,8 @@ const PostCard = ({
     });
     update();
   };
+
+  console.log(userData)
   
   return (
     <div className="w-full max-w-2xl rounded-lg flex flex-col gap-4 bg-white p-5 max-sm:gap-2 border border-[#FFD700]">
@@ -110,7 +112,7 @@ const PostCard = ({
 
       <Image
         src={post?.postPhoto}
-        alt="post photo"
+        alt="photo"
         width={200}
         height={150}
         className="rounded-lg w-full h-[25rem] max-md:h-[15rem]"
