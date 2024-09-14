@@ -24,9 +24,10 @@ const Posting = ({ post, apiEndPoint }: { post: any; apiEndPoint: any }) => {
 
   const router = useRouter();
   
-  const postPhoto : FileList | undefined = watch("postPhoto");
+  const postPhoto= watch("postPhoto");
   
   const handlePublish = async (data: any) => {
+    console.log(data)
     try {
       const post = new FormData();
       post.append("creator", data.creator);

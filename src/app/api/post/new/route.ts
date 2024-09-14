@@ -1,52 +1,59 @@
-import Post from "@/lib/models/Post"
-import User from "@/lib/models/User"
-import { connectToDB } from "@/lib/mongodb/mongoose"
-import { writeFile } from "fs/promises"
+import Post from "@/lib/models/Post";
+import User from "@/lib/models/User";
+import { connectToDB } from "@/lib/mongodb/mongoose";
+import { writeFile } from "fs/promises";
+import path from "path";
 
-export const POST = async (req:any) => {
-  const path = require("path")
-  const currentWorkingDirectory = process.cwd()
-  
+export const POST = async (req: Request) => {
   try {
-    await connectToDB()
+    await connectToDB();
 
-    const data = await req.formData()
+    const data = await req.formData();
 
-    let postPhoto = data.get("postPhoto")
+    // Get file and validate it
+    let postPhoto = data.get("postPhoto") as File;
+    if (!postPhoto || postPhoto.size === 0) {
+      return new Response("No photo provided", { status: 400 });
+    }
 
-    const bytes = await postPhoto.arrayBuffer()
-    const buffer = Buffer.from(bytes)
+    const validMimeTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (!validMimeTypes.includes(postPhoto.type)) {
+      return new Response("Invalid file type", { status: 400 });
+    }
 
-    const postPhotoPath = path.join(
-      currentWorkingDirectory,
-      "public",
-      "uploads",
-      postPhoto.name
-    )
+    // File path setup
+    const currentWorkingDirectory = process.cwd();
+    const uniqueFileName = `${postPhoto.name}`;
+    const postPhotoPath = path.join(currentWorkingDirectory, "public", "uploads", uniqueFileName);
 
-    await writeFile(postPhotoPath, buffer)
+    // Convert file to buffer and save it
+    const bytes = await postPhoto.arrayBuffer();
+    const buffer = Buffer.from(bytes);
 
-    postPhoto = `/${postPhoto.name}`
+    await writeFile(postPhotoPath, buffer);
 
+    const postPhotoUrl = `/uploads/${uniqueFileName}`;
+
+    // Create new post
     const newPost = await Post.create({
-      creator: data.get("creatorId"),
+      creator: data.get("creator"),
       caption: data.get("caption"),
       tag: data.get("tag"),
-      postPhoto: postPhoto
-    })
+      postPhoto: postPhotoUrl,
+    });
 
-    await newPost.save()
+    await newPost.save();
 
-    // Update the user's posts array
+    // Update user's posts array
     await User.findByIdAndUpdate(
-      data.get("creatorId"),
+      data.get("creator"),
       { $push: { posts: newPost._id } },
-      { new: true, useFindAndModify: false }
-    )
+      { new: true }
+    );
 
-    return new Response(JSON.stringify(newPost), { status: 200 })
+    return new Response(JSON.stringify(newPost), { status: 200 });
   } catch (err) {
-    console.error(err)
-    return new Response("Failed to create a new post", { status: 500 })
+    console.error(err);
+    return new Response("Failed to create a new post", { status: 500 });
   }
-}
+};
