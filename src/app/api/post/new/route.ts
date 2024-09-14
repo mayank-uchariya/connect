@@ -21,25 +21,24 @@ export const POST = async (req: Request) => {
       return new Response("Invalid file type", { status: 400 });
     }
 
-    // File path setup
-    const currentWorkingDirectory = process.cwd();
-    const uniqueFileName = `${postPhoto.name}`;
-    const postPhotoPath = path.join(currentWorkingDirectory, "public", "uploads", uniqueFileName);
+    // File path setup to store the file in the temporary directory
+    const uniqueFileName = `${Date.now()}-${postPhoto.name}`;
+    const postPhotoPath = path.join("/tmp", uniqueFileName);
 
-    // Convert file to buffer and save it
+    // Convert file to buffer and save it to the /tmp directory
     const bytes = await postPhoto.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
     await writeFile(postPhotoPath, buffer);
 
-    const postPhotoUrl = `/uploads/${uniqueFileName}`;
+    const postPhotoUrl = `/uploads/${uniqueFileName}`; // This won't persist after the request ends
 
-    // Create new post
+    // Create new post in MongoDB
     const newPost = await Post.create({
       creator: data.get("creator"),
       caption: data.get("caption"),
       tag: data.get("tag"),
-      postPhoto: postPhotoUrl,
+      postPhoto: postPhotoUrl, // URL points to /tmp but it won't persist
     });
 
     await newPost.save();
@@ -51,7 +50,12 @@ export const POST = async (req: Request) => {
       { new: true }
     );
 
-    return new Response(JSON.stringify(newPost), { status: 200 });
+    return new Response(JSON.stringify(newPost), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   } catch (err) {
     console.error(err);
     return new Response("Failed to create a new post", { status: 500 });
