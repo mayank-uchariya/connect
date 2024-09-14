@@ -26,7 +26,7 @@ export const POST = async (req:any) => {
 
     await writeFile(postPhotoPath, buffer)
 
-    postPhoto = `/uploads/${postPhoto.name}`
+    postPhoto = `/${postPhoto.name}`
 
     const newPost = await Post.create({
       creator: data.get("creatorId"),

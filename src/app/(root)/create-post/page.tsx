@@ -51,7 +51,7 @@ const CreatePost = () => {
   ) : (
     <div className="bg-gray-50">
       <h1 className="text-2xl font-bold underline p-4">Create Post</h1>
-      <Posting post={postData} apiEndPoint={`/api/post/new`} />
+      <Posting post={postData} apiEndPoint={`api/post/new`} />
     </div>
   );
 };
